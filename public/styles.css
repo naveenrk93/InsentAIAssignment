@@ -1,0 +1,73 @@
+.header{
+    width: 700px;
+    font-size: 12.8vh;
+    line-height: 0.8;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.sub-header{
+    width: 600px;
+    font-family: sans-serif;
+}
+
+.homepage-image{
+    position: fixed;
+    height: 100%;
+    margin-left: 40%
+}
+
+.chatbox{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 360px;
+    height: 550px;
+    border: 1px solid black;
+    border-radius: 15px;
+    z-index: 2147483647;
+}
+
+.chatbox-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: rgb(10, 91, 255);
+}
+
+.chatbox-messages{
+    background-color: #ffffff;
+    height: 66%
+}
+
+.chatbox-footer{
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(230, 236, 239);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 23px 0px;
+    background-color: #fefefe;
+    height: 24%;
+}
+
+.chatbox-header-title{
+    flex-grow: 7;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    overflow: hidden;
+    font-size: 16px;
+    color: #ffffff
+}
+.icon{
+    flex-grow: 1;
+}
+
+.avatar{
+    width: 36px !important;
+    height: 36px !important;
+    margin-left: 12px;
+    margin-right: 12px !important;
+}

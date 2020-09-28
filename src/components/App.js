@@ -1,30 +1,23 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom';
+import Homepage from './Homepage.js'
+import crypto from 'crypto'
 
-const Page1 = () => {
-    return <div>PageOne</div>
-}
 
-const Page2 = () => {
-    return (
-        <div>
-            PageTwo
-            <button>Click Me!</button>
-        </div>
-    );
-}
 
-const App = () => {
-    return (
-        <div>
-            <BrowserRouter >
-                <div>
-                    <Route path="/" exact component={Page1}/>
-                    <Route path="/pagetwo" component={Page2}/>
-                </div>
-            </BrowserRouter>
-        </div>
-    );
+class App extends React.Component{
+
+    render(){
+        return (
+            <div className="ui container">
+                <BrowserRouter >
+                    <div className="ui body">
+                        <Route path="/" exact component={Homepage}/>
+                    </div>
+                </BrowserRouter>
+            </div>
+        );
+    }
 }
 
 export default App
