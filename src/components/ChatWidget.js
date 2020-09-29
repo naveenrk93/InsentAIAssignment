@@ -19,7 +19,6 @@ class ChatWidget extends React.Component{
     }
 
     componentDidMount() {
-
         let userId = localStorage.getItem("userId");
         if(userId === null)
         {

@@ -12,13 +12,15 @@ class ChatboxMessages extends React.Component{
         )
     }
 
+
     componentDidMount() {
-        this.props.getUserMessages(localStorage.getItem("userId"),this.props.ChannelId)
+        console.log("CHANNEL ID");
+        console.log(this.props.ChannelId);
+        this.props.getUserMessages(localStorage.getItem("userId"), this.props.ChannelId)
     }
 }
 const mapStateToProps = (state) => {
     return {
-        ChatBoxMessages: state.Messages,
         UserSession: state.UserSession,
         ChannelId: state.channelId
     }

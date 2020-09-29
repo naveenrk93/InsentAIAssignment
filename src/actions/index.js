@@ -14,7 +14,7 @@ export const getUser = (userId) => async dispatch => {
 };
 
 export const getUserMessages = (UserId, channel_id) => async dispatch => {
-    const response = await InsentAPI.post('/user/channel/'+channel_id,  {},{
+    const response = await InsentAPI.get(`/user/channel/${channel_id}`,  {},{
         headers: {
             Authorization: "Bearer V9WxVwHha8pFPNCMz2PK",
             userId: UserId
@@ -25,6 +25,10 @@ export const getUserMessages = (UserId, channel_id) => async dispatch => {
         type: "GET_USER_MESSAGES",
         payload: response.data
     })
+}
+
+export const getUserId = () => async dispatch => {
+
 }
 
 export const getUserSession = (UserId) => async dispatch => {
