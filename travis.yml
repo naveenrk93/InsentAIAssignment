@@ -1,0 +1,24 @@
+language: node_js
+
+sudo: true
+
+node_js:
+  - '9.1'
+
+before_install:
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+  - sh ./configure_aws.sh
+install:
+  - npm install
+
+script:
+  - npm test
+
+after_success:
+  - aws cloudformation create-stack --stack-name MySTACK123 --template-body file://./Amazon_VPC_autoScaling.json --parameters ParameterKey=KeyName,ParameterValue=MyKey ParameterKey=WebServerInstanceType,ParameterValue=m3.large
+
+env:
+  global:
+    - secure: FyiHBE5FxV1GbsYOFMHpDTPMf7KbNIgFwrnsrro5HCiyEqWG4T0kEPh0uBD7/qwI6UwE7swvE/eXIj+tv8B1s4HD+NkFXu7IPfi6Z/5eOlMfL69DiE/AElfSxWaYM7/qF0lxEsCJWuIEI787fHY7TZrSlQrARK4uy62g/3UIF/ppv55Am9MQR00XVj2oc15cxysDvKN6yqF0UUbiNs4BOhwYLeRyg7J3I6I+/zsMT/3WZXDSDSlATtxKroHBgLoDf/aWa7k+ZthEUJCqkFYAf+hm4tI2yL1MgQjxszhG5zryYSoomigvAk4OUth6wH9L5lq6AExhAz7Ykk6uaZm3KUVZ2wOT70Kka7ueqKAxhcvSCNas1IGZj/hliMdi54Wx4/DKn2QW2uSugi4/qx88INSN9jU6aGy6UNy6pDF24iS7ktbm2mOaUp/1ycpwfV/RRsnGILmJ9WvMQER6Wb0bo2lLPb1KJWv1XMf+TM+Ss+kKS8R+4SmOR9jcgR4KTC2Mj/7f4RD/L2Yzipl/uOQnK0fURkZteLMKjz3Prba+t1anuYk8thRtLqUQ75hv1WqjeE5CWvEeYXB8Ca5PcLVJO1ZbnJqx4alb4HbI8zaPM/sNr9yT7aI2VRvqdpKroizKItwsAfLXgnU4NtxpB6BtsYNcvT089U2Pkl+/y2qHm84=
+    - secure: UIx40mJO0QELUXwAwuDocgkF6jce1XgUbL4rqCzA4c9Z9b36+rIiNeIu9n9VWN/tWu0/RPiGsU8NnsOMM1zbxsYjXUTkLOAI6NdwG6EEE2mtSNSD4ZsIByfm+tw5/q5NhYO1lqg9R9/3urz3tTZplvqNCZOoLz/7v0waIRY8rQBtktUqPpzweMxezEDRshNd7ecpb1i4+crpwg34SoimKADdFkyuGtL+jmaqOIXx4GFdKpYFhv15YURHWSp5226wLFY4F9ricFP9GMB3SWO6Ng0NBu21jb6eKn3rTlCnlJwaRHWnOlfOvcbPwUGB+dolMXdHy/Hhgo55+N1RHywtX5KgwAcCmxBkCNcid02ji8t2gD5ASwn8dWSw6rcobhPOEYmEcsDhb6ShSWWzkkkKf26ZBAGCpb40FGu2oqE5trgrBgs835COsDWykWj4e5XV2xpyk7OvScyPIHlNqLrIQPxixJsD49aQKvo16WMJTfjhqIvJtYS+aXXmcH3+LjOe+hF8jByl3QoYirWPjJoyaz0TSmX8wqLFXbZiTRHCU59DlwTnqWLxUEkNTD/AfENP3jgQyidiBQrIoPOeevd+lpGZDblfPLkYPJ48LVRrqv/JQM1NdGPDVJS0b6DYCzLk0rS3PI9BQa6bKuugSBgXbSoes7K5P/UuTzkGYTyvM7A=

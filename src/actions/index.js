@@ -58,8 +58,16 @@ export const PostUserResponse = (UserId, UserSession, ChannelId) => async dispat
         },
     });
 
-    pusher.subscribe('presence-insentrecruit-widget-user-'+UserId)
-    console.log(pusher.channels.channels['presence-insentrecruit-widget-user-'+UserId]);
+    let channel = await pusher.subscribe('presence-insentrecruit-widget-user-'+UserId)
+    await channel.bind('server-message', ()=>{
+        console.log("here");
+    })
+    await channel.bind('client-widget-message', ()=>{
+        console.log("there");
+    })
+
+    let triggered = await channel.trigger('client-widget-message', "EASIEST DAY OF MY LIFE!")
+
     const response = await InsentAPI.post('/user/pageVisit/spentTime/'+UserSession,
         {
             timeSpent: 10,

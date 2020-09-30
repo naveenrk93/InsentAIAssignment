@@ -9,18 +9,6 @@ class ChatboxMessages extends React.Component{
 
         if(!this.props.UserId || this.props.UserId === {})
             return null
-        const pusher = new Pusher('67bb469433cb732caa7a', {
-            cluster: "mt1",
-            authEndpoint: 'https://insentrecruit.api.insent.ai/pusher/presence/auth/visitor?userid=' + this.props.UserId,
-            auth: {
-                headers: {
-                    Authorization: "Bearer V9WxVwHha8pFPNCMz2PK",
-                },
-            },
-        });
-
-        pusher.subscribe('presence-insentrecruit-widget-user-'+this.props.UserId,'client-widget-message',)
-
         if(!this.props.Messages || !this.props.Messages.map)
             return null;
         let items = this.props.Messages.map((item) => {
