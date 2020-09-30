@@ -8,7 +8,7 @@ node_js:
 before_install:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
-  - 
+  - sh ./configure_aws.sh
 install:
   - npm install
 
