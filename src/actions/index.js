@@ -15,6 +15,7 @@ export const getUser = (userId) => async dispatch => {
 };
 
 export const getUserMessages = (UserId, channel_id) => async dispatch => {
+
     const response = await InsentAPI.get(`/user/channels/${channel_id}`,  {
         headers: {
             Authorization: "Bearer V9WxVwHha8pFPNCMz2PK",
@@ -29,7 +30,19 @@ export const getUserMessages = (UserId, channel_id) => async dispatch => {
 }
 
 export const getUserId = () => async dispatch => {
+    const response = await InsentAPI.get(`getuser?url=insent-recruitment.web.app%2F`, {
+        headers: {
+            Authorization: "Bearer V9WxVwHha8pFPNCMz2PK"
+        }
+    })
 
+    dispatch({
+        type: "GET_USER_ID",
+        payload: response.data
+    })
+
+    localStorage.setItem("userId", response.data.user.id);
+    return response.data.user.id;
 }
 
 export const getUserSession = (UserId) => async dispatch => {
@@ -48,7 +61,8 @@ export const getUserSession = (UserId) => async dispatch => {
 }
 
 export const PostUserResponse = (UserId, UserSession, ChannelId) => async dispatch => {
-    const pusher = new Pusher('67bb469433cb732caa7a', {
+
+    const pusher = await new Pusher('67bb469433cb732caa7a', {
         cluster: "mt1",
         authEndpoint: 'https://insentrecruit.api.insent.ai/pusher/presence/auth/visitor?userid=' + UserId,
         auth: {
@@ -57,18 +71,24 @@ export const PostUserResponse = (UserId, UserSession, ChannelId) => async dispat
             },
         },
     });
-    pusher.logToConsole = true;
-    console.log(pusher);
 
     let channel = await pusher.subscribe('presence-insentrecruit-widget-user-'+UserId)
-    await channel.bind('server-message', ()=>{
-        console.log("here");
-    })
-    await channel.bind('client-widget-message', ()=>{
-        console.log("there");
-    })
 
-    let triggered = await channel.trigger('client-widget-message', {})
+    await channel.bind('client-widget-message', function (data, metadata) {
+        console.log('received data from', metadata.user_id, ':', data);
+    });
+
+    await channel.bind('server-message', (data)=>{
+        console.log("here");
+    });
+
+    console.log(channel);
+    let triggered = await channel.trigger('client-widget-message', {
+        channelName: "private-EDqBmzWBXYHRpKd1Z16014295209331601429520985",
+        message: {[{}]: "h"},
+    senderId: "EDqBmzWBXYHRpKd1Z1601429520933"
+    });
+
     console.log(triggered)
     const response = await InsentAPI.post('/user/pageVisit/spentTime/'+UserSession,
         {
@@ -101,3 +121,4 @@ export const openWidget = () => dispatch => {
         type: "OPEN_WIDGET"
     })
 }
+

@@ -1,14 +1,12 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {getPusher, getUser, getUserMessages, getUserSession} from "../actions";
+import {getPusher, getUser, getUserMessages, getUserSession, getUserId} from "../actions";
 import Pusher from 'pusher-js'
 
 class ChatboxMessages extends React.Component{
 
     renderMessagesList(){
 
-        if(!this.props.UserId || this.props.UserId === {})
-            return null
         if(!this.props.Messages || !this.props.Messages.map)
             return null;
         let items = this.props.Messages.map((item) => {
@@ -39,6 +37,8 @@ class ChatboxMessages extends React.Component{
 
     async componentDidMount() {
         let userId = localStorage.getItem("userId");
+        if(userId == null)
+            userId = this.props.getUserId()
         await this.props.getUserSession(userId)
         localStorage.getItem("userId")
         await this.props.getUserMessages(localStorage.getItem("userId"), this.props.ChannelId)
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {getPusher, getUserMessages, getUserSession, getUser})(ChatboxMessages);
+export default connect(mapStateToProps, {getPusher, getUserMessages, getUserSession, getUser, getUserId})(ChatboxMessages);

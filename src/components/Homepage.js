@@ -6,7 +6,7 @@ class Homepage extends React.Component{
 
     render(){
         return (
-            <div class="Homepage">
+            <div className="Homepage">
                 <div className="ui secondary  menu">
                     <a className="item">
                         DRIFT
