@@ -57,6 +57,8 @@ export const PostUserResponse = (UserId, UserSession, ChannelId) => async dispat
             },
         },
     });
+    pusher.logToConsole = true;
+    console.log(pusher);
 
     let channel = await pusher.subscribe('presence-insentrecruit-widget-user-'+UserId)
     await channel.bind('server-message', ()=>{
@@ -66,8 +68,8 @@ export const PostUserResponse = (UserId, UserSession, ChannelId) => async dispat
         console.log("there");
     })
 
-    let triggered = await channel.trigger('client-widget-message', "EASIEST DAY OF MY LIFE!")
-
+    let triggered = await channel.trigger('client-widget-message', {})
+    console.log(triggered)
     const response = await InsentAPI.post('/user/pageVisit/spentTime/'+UserSession,
         {
             timeSpent: 10,
@@ -85,5 +87,17 @@ export const getPusher = (pusher) => dispatch => {
     dispatch({
         type: "GET_PUSHER",
         payload: pusher
+    })
+}
+
+export const closeWidget = () => dispatch => {
+    dispatch({
+        type: "CLOSE_WIDGET"
+    })
+}
+
+export const openWidget = () => dispatch => {
+    dispatch({
+        type: "OPEN_WIDGET"
     })
 }
