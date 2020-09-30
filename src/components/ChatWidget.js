@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 
 class ChatWidget extends React.Component{
 
-
     render(){
 
         if(this.props.isChatWidgetOpen)

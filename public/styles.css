@@ -1,12 +1,40 @@
 .header{
+    padding-top: 50px;
+    padding-left: 50px;
+
     width: 700px;
-    font-size: 12.8vh;
+    font-size: 9.8vh;
     line-height: 0.8;
     font-weight: bold;
     font-family: sans-serif;
 }
 
+.ui.container{
+    width: 100% !important
+}
+
+.item{
+    font-size: 20px !important;
+    font-weight: bold !important;
+    margin: .78571429em .92857143em !important;
+    padding: 5px!important;
+}
+
+.demoitem{
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-radius: 0px !important;
+}
+
+.driftfreeitem{
+    border: 2px solid black !important;
+
+}
+
+
 .sub-header{
+    padding-left: 50px;
+    padding-right: 50px;
     width: 600px;
     font-family: sans-serif;
 }
@@ -28,6 +56,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .chatbox{
